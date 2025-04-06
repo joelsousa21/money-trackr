@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MoneyTrackr</title>
+  </head>
+  <body>
+    <script>
+      console.log("A software Engineer!");
+
+      console.log("janeiro");
+      salario1 = 5000;
+      aluguel1 = 750;
+      contaDeluz1 = 89;
+      contaDeagua1 = 69;
+      internet1 = 145;
+      transporte1 = 200;
+      lazer1 = 300;
+      alimentacao1 = 1200;
+      saldo1 =
+        salario1 -
+        aluguel1 -
+        contaDeluz1 -
+        contaDeagua1 -
+        internet1 -
+        transporte1 -
+        lazer1 -
+        alimentacao1;
+
+      console.log(saldo1);
+      estaNegativo1 = saldo1 < 0;
+      if (estaNegativo1) {
+        console.log("juros de janeiro");
+        juros1 = saldo1 * 0.1;
+        saldo1 += juros1;
+        console.log(juros1);
+        console.log(saldo1);
+      } else {
+        console.log("rendimento de janeiro");
+        rendimento1 = saldo1 * 0.05;
+        console.log(rendimento1);
+        saldo1 += rendimento1;
+        console.log(saldo1);
+      }
+
+      console.log("fevereiro");
+      salario2 = 6000;
+      aluguel2 = 760;
+      contaDeluz2 = 89;
+      contaDeagua2 = 69;
+      internet2 = 155;
+      transporte2 = 210;
+      lazer2 = 400;
+      alimentacao2 = 1250;
+      saldo2 =
+        salario2 -
+        aluguel2 -
+        contaDeluz2 -
+        contaDeagua2 -
+        internet2 -
+        transporte2 -
+        lazer2 -
+        alimentacao2;
+      console.log(saldo2);
+      estaNegativo2 = saldo2 < 0;
+
+      if (estaNegativo2) {
+        console.log("juros de fevereiro");
+        juros2 = saldo2 * 0.1;
+        console.log(juros2);
+        saldo2 += juros2;
+        console.log(saldo2);
+      } else {
+        console.log("rendimento de fevereiro");
+        rendimento2 = saldo2 * 0.05;
+        console.log(rendimento2);
+        saldo2 += rendimento2;
+        console.log(saldo2);
+      }
+      acumuladoDoAno = saldo1 + saldo2;
+      console.log("O acumulado do ano é: R$", acumuladoDoAno);
+    </script>
+  </body>
+</html>
