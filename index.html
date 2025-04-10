@@ -7,18 +7,66 @@
   </head>
   <body>
     <script>
-      console.log("A software Engineer!");
+      function rounded(value) {
+        return Math.round(value * 100) / 100;
+      }
 
-      console.log("janeiro");
+      function calculateInterest(value) {
+        interest = rounded(value * 0.1);
+        return interest;
+      }
+
+      function calculateIncome(value) {
+        income = rounded(value * 0.005);
+        return income;
+      }
+
+      function calculateBalance(
+        mes,
+        saldoInicial,
+        salario,
+        aluguel,
+        contaDeluz,
+        contaDeagua,
+        internet,
+        transporte,
+        lazer,
+        alimentacao
+      ) {
+        balance =
+          saldoInicial +
+          salario -
+          aluguel -
+          contaDeluz -
+          contaDeagua -
+          internet -
+          transporte -
+          lazer -
+          alimentacao;
+        console.log(mes);
+        isNegative = balance < 0;
+
+        if (isNegative) {
+          interest = calculateInterest(balance);
+          balance += interest;
+        } else {
+          income = calculateIncome(balance);
+          console.log(income);
+          balance += income;
+        }
+        return rounded(balance);
+      }
+      console.log(calculateInterest);
+      console.log("A software Engineer!");
       salario1 = 5000;
-      aluguel1 = 750;
-      contaDeluz1 = 89;
-      contaDeagua1 = 69;
-      internet1 = 145;
+      aluguel1 = 1000;
+      contaDeluz1 = 500;
+      contaDeagua1 = 500;
+      internet1 = 500;
       transporte1 = 200;
       lazer1 = 300;
-      alimentacao1 = 1200;
-      saldo1 =
+      alimentacao1 = 1000;
+      balance1 =
         salario1 -
         aluguel1 -
         contaDeluz1 -
@@ -27,33 +75,28 @@
         transporte1 -
         lazer1 -
         alimentacao1;
-
-      console.log(saldo1);
-      estaNegativo1 = saldo1 < 0;
-      if (estaNegativo1) {
-        console.log("juros de janeiro");
-        juros1 = saldo1 * 0.1;
-        saldo1 += juros1;
-        console.log(juros1);
-        console.log(saldo1);
-      } else {
-        console.log("rendimento de janeiro");
-        rendimento1 = saldo1 * 0.05;
-        console.log(rendimento1);
-        saldo1 += rendimento1;
-        console.log(saldo1);
-      }
-
-      console.log("fevereiro");
+      balance1 = calculateBalance(
+        "janeiro",
+        0,
+        salario1,
+        aluguel1,
+        contaDeagua1,
+        contaDeluz1,
+        internet1,
+        transporte1,
+        lazer1,
+        alimentacao1
+      );
+      console.log(balance1);
       salario2 = 6000;
-      aluguel2 = 760;
-      contaDeluz2 = 89;
-      contaDeagua2 = 69;
-      internet2 = 155;
-      transporte2 = 210;
-      lazer2 = 400;
-      alimentacao2 = 1250;
-      saldo2 =
+      aluguel2 = 2000;
+      contaDeluz2 = 1000;
+      contaDeagua2 = 1000;
+      internet2 = 250;
+      transporte2 = 250;
+      lazer2 = 250;
+      alimentacao2 = 250;
+      balance2 =
         salario2 -
         aluguel2 -
         contaDeluz2 -
@@ -62,24 +105,51 @@
         transporte2 -
         lazer2 -
         alimentacao2;
-      console.log(saldo2);
-      estaNegativo2 = saldo2 < 0;
-
-      if (estaNegativo2) {
-        console.log("juros de fevereiro");
-        juros2 = saldo2 * 0.1;
-        console.log(juros2);
-        saldo2 += juros2;
-        console.log(saldo2);
-      } else {
-        console.log("rendimento de fevereiro");
-        rendimento2 = saldo2 * 0.05;
-        console.log(rendimento2);
-        saldo2 += rendimento2;
-        console.log(saldo2);
-      }
-      acumuladoDoAno = saldo1 + saldo2;
-      console.log("O acumulado do ano é: R$", acumuladoDoAno);
+      balance2 = calculateBalance(
+        "fevereiro",
+        balance1,
+        salario2,
+        aluguel2,
+        contaDeluz2,
+        contaDeagua2,
+        internet2,
+        transporte2,
+        lazer2,
+        alimentacao2
+      );
+      console.log(balance2);
+      salario3 = 4000;
+      aluguel3 = 1200;
+      contaDeluz3 = 200;
+      contaDeagua3 = 100;
+      internet3 = 200;
+      transporte3 = 500;
+      lazer3 = 800;
+      alimentacao3 = 1000;
+      balance3 =
+        salario3 -
+        aluguel3 -
+        contaDeluz3 -
+        contaDeagua3 -
+        internet3 -
+        transporte3 -
+        lazer3 -
+        alimentacao3;
+      balance3 = calculateBalance(
+        "marco",
+        balance2,
+        salario3,
+        aluguel3,
+        contaDeluz3,
+        contaDeagua3,
+        internet3,
+        transporte3,
+        lazer3,
+        alimentacao3
+      );
+      console.log(balance3);
+      acumuladoDoAno = balance1 + balance2 + balance3;
+      console.log("O acumulado do ano é: R$", rounded(acumuladoDoAno));
     </script>
   </body>
 </html>
