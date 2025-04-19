@@ -7,6 +7,27 @@
   </head>
   <body>
     <script>
+      class Release {
+        constructor(category, type, value) {
+          if (type !== "income" && type !== "expensive") {
+            throw new Error(
+              "Lançamento Inválido: O tipo deve ser receita ou despesa"
+            );
+          }
+          if (value <= 0) {
+            throw new Error(
+              "Lançamento Inválido: O valor deve ser maior que zero."
+            );
+          }
+          if (category === "") {
+            throw new Error("Lançamento Inválido: A categoria é obrigatória.");
+          }
+          this.category = category;
+          this.type = type;
+          this.value = value;
+        }
+      }
+
       function rounded(value) {
         return Math.round(value * 100) / 100;
       }
@@ -21,70 +42,114 @@
         return income;
       }
 
+      function distributeExpensive(releases, total) {
+        distributionOfExpensive = [];
+        for (release of releases) {
+          if (release.type === "expensive") {
+            percentage = rounded((release.value / total) * 100);
+            distributionOfExpensive.push({
+              category: release.category,
+              percentage,
+            });
+          }
+        }
+        return distributionOfExpensive;
+      }
+
       function calculateBalance(month, initialBalance, releases) {
         console.log(month);
-        balance = initialBalance;
+        monthTotalizer = {
+          distributionOfExpensive: [],
+          initialBalance,
+          revenue: 0,
+          expensive: 0,
+          income: 0,
+          interest: 0,
+          balance: 0,
+        };
+        monthTotalizer.balance = initialBalance;
         for (release of releases) {
           if (release.type === "income") {
-            balance += release.value;
+            monthTotalizer.balance += release.value;
+            monthTotalizer.income *= release.value;
+            monthTotalizer.interest *= release.value;
+            monthTotalizer.revenue = release.value;
           }
           if (release.type === "expensive") {
-            balance -= release.value;
+            monthTotalizer.balance -= release.value;
+            monthTotalizer.expensive += release.value;
           }
         }
-        isNegative = balance < 0;
+        console.log(monthTotalizer);
+        monthTotalizer.distributionOfExpensive = distributeExpensive(
+          releases,
+          monthTotalizer.expensive
+        );
+        isNegative = monthTotalizer.balance < 0;
         if (isNegative) {
-          interest = calculateInterest(balance);
-          balance += interest;
+          monthTotalizer.interest = calculateInterest(monthTotalizer.balance);
+          monthTotalizer.balance += interest;
         } else {
-          income = calculateIncome(balance);
+          monthTotalizer.income = calculateIncome(monthTotalizer.balance);
           console.log(income);
-          balance += income;
+          monthTotalizer.balance += income;
         }
-        return rounded(balance);
+        return rounded(monthTotalizer.balance);
       }
       console.log("A software Engineer!");
 
       januaryRelease = [
-        { category: "Salário", type: "income", value: 5000 },
-        { category: "Aluguel", type: "expensive", value: 1000 },
-        { category: "Conta de luz", type: "expensive", value: 500 },
-        { category: "Conta de Água", type: "expensive", value: 500 },
-        { category: "Internet", type: "expensive", value: 500 },
-        { category: "Transporte", type: "expensive", value: 200 },
-        { category: "Lazer", type: "expensive", value: 300 },
-        { category: "Alimentação", type: "expensive", value: 1000 },
+        new Release("Salário", "income", 5000),
+        new Release("Aluguel", "expensive", 2000),
+        new Release("Conta de luz", "expensive", 500),
+        new Release("Conta de Água", "expensive", 500),
+        new Release("Internet", "expensive", 500),
+        new Release("Transporte", "expensive", 200),
+        new Release("Lazer", "expensive", 300),
+        new Release("Alimentação", "expensive", 1000),
       ];
       initialBalance = 0;
-      balance1 = calculateBalance("janeiro", initialBalance, januaryRelease);
-      console.log(balance1);
+      monthTotalizer1 = calculateBalance(
+        "janeiro",
+        initialBalance,
+        januaryRelease
+      );
+      console.log(monthTotalizer1);
 
       februaryRelease = [
-        { category: "Salário", type: "income", value: 6000 },
-        { category: "Aluguel", type: "expensive", value: 2000 },
-        { category: "Conta de luz", type: "expensive", value: 1000 },
-        { category: "Conta de Água", type: "expensive", value: 1000 },
-        { category: "Internet", type: "expensive", value: 250 },
-        { category: "Transporte", type: "expensive", value: 250 },
-        { category: "Lazer", type: "expensive", value: 250 },
-        { category: "Alimentação", type: "expensive", value: 250 },
+        new Release("Salário", "income", 6000),
+        new Release("Aluguel", "expensive", 4000),
+        new Release("Conta de luz", "expensive", 1000),
+        new Release("Conta de Água", "expensive", 1000),
+        new Release("Internet", "expensive", 250),
+        new Release("Transporte", "expensive", 250),
+        new Release("Lazer", "expensive", 250),
+        new Release("Alimentação", "expensive", 250),
       ];
-      balance2 = calculateBalance("fevereiro", balance1, februaryRelease);
-      console.log(balance2);
+      monthTotalizer2 = calculateBalance(
+        "fevereiro",
+        monthTotalizer1,
+        februaryRelease
+      );
+      console.log(monthTotalizer2);
 
       marchRelease = [
-        { category: "Salário", type: "income", value: 4000 },
-        { category: "Aluguel", type: "expensive", value: 1200 },
-        { category: "Conta de luz", type: "expensive", value: 200 },
-        { category: "Conta de Água", type: "expensive", value: 100 },
-        { category: "Internet", type: "expensive", value: 200 },
-        { category: "Transporte", type: "expensive", value: 500 },
-        { category: "Lazer", type: "expensive", value: 800 },
-        { category: "Alimentação", type: "expensive", value: 1000 },
+        new Release("Salário", "income", 4000),
+        new Release("Aluguel", "expensive", 1200),
+        new Release("Conta de luz", "expensive", 200),
+        new Release("Conta de Água", "expensive", 100),
+        new Release("Internet", "expensive", 200),
+        new Release("Transporte", "expensive", 500),
+        new Release("Lazer", "expensive", 800),
+        new Release("Alimentação", "expensive", 1000),
       ];
-      balance3 = calculateBalance("marco", balance2, marchRelease);
-      console.log(balance3);
-      acumuladoDoAno = balance1 + balance2 + balance3;
+      monthTotalizer3 = calculateBalance(
+        "marco",
+        monthTotalizer2,
+        marchRelease
+      );
+      console.log(monthTotalizer3);
+      acumuladoDoAno = monthTotalizer1 + monthTotalizer2 + monthTotalizer3;
 
       console.log("O acumulado do ano é: R$", rounded(acumuladoDoAno));
     </script>
