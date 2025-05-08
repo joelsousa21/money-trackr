@@ -1,29 +1,17 @@
-janeiro
+## Money Tracker
 
-salario: 5000
-aluguel: 750
-conta de luz: 89
-conta de agua: 69
-internet: 145
-transporte: 200
-lazer: 300
-alimentacao: 1200
+Sistema de controle financeiro mensal e anual para simulação de entradas e saídas de recursos, com análise de saldo, juros, rendimentos e distribuição de gastos por categoria.
 
-fevereiro
+## Objetivos do Projeto
 
-salario: 6000
-aluguel: 550
-conta de luz: 49
-conta de agua: 79
-internet: 150
-transporte: 210
-lazer: 350
-alimentacao: 1100
+- Registrar receitas e despesas mensais.
 
-Atividades:
+- Calcular o saldo de cada mês (receitas - despesas).
 
-* Quanto sobrou ou faltou de dinheiro em cada mês?
-* Quanto está sobrando ou faltando no acumulado do ano?
-* Se estiver faltando, calcular juros de 10% ao mês
-* Se estiver sobrando, calcular rendimentos de 0.5% ao mês
-* Qual é o percentual de gastos em cada área? Moraria, transporte, alimentação e lazer?
+- Determinar o saldo acumulado ao longo do ano.
+
+- Aplicar juros de 10% ao mês sobre saldos negativos.
+
+- Aplicar rendimentos de 0,5% ao mês sobre saldos positivos.
+
+- Analisar o percentual de gastos em categorias específicas: moradia, transporte, alimentação e lazer.

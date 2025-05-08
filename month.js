@@ -7,7 +7,6 @@ class Month {
     this.initialBalance = initialBalance;
     (this.totalizer = {
       distributionOfExpensive: [],
-      initialBalance,
       revenue: 0,
       expensive: 0,
       income: 0,
@@ -28,6 +27,14 @@ class Month {
     return income;
   }
   calculateBalance() {
+    this.totalizer = {
+      distributionOfExpensive: [],
+      revenue: 0,
+      expensive: 0,
+      income: 0,
+      interest: 0,
+      balance: 0,
+    };
     this.totalizer.balance = this.initialBalance;
     this.computeIncome();
     this.computeExpensive();
