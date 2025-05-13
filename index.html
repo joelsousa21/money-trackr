@@ -4,16 +4,22 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MoneyTrackr</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <h1>MoneyTrackr</h1>
-    <input id="month" type="text" placeholder="Mês" />
-    <input id="type" type="text" placeholder="Tipo" />
-    <input id="category" type="text" placeholder="Categoria" />
-    <input id="value" type="number" placeholder="Valor" />
-    <button id="button">Adicionar Lançamento</button>
-    <div id="app"></div>
+    <div id="form-release">
+      <select id="month"></select>
+      <select id="type">
+        <option value="income">Receita</option>
+        <option value="expensive">Despesa</option>
+      </select>
+      <input id="category" type="text" placeholder="Categoria" />
+      <input id="value" type="number" placeholder="Valor" />
+      <button id="button">Adicionar Lançamento</button>
+    </div>
 
+    <div id="app"></div>
     <script src="utils.js"></script>
     <script src="release.js"></script>
     <script src="month.js"></script>

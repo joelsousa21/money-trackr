@@ -59,16 +59,55 @@ function render() {
     app.firstChild.remove();
   }
   const painel = document.createElement("div");
+  const colors = ["red", "yellow", "green", "blue"];
+  const graphic = document.createElement("div");
+  graphic.className = "graphic";
   for (const month of year.months) {
-    addElement(painel, "h3", month.name);
-    console.log(painel);
+    const column = document.createElement("div");
+    column.className = "graphic-column";
+    const color = document.createElement("div");
+    color.style.height = (month.totalizer.balance * 100) / 10000 + "px";
+    color.style.background = colors.pop();
+    column.appendChild(color);
+    const monthName = document.createElement("div");
+    monthName.className = "graphic-column-text";
+    monthName.innerText = month.name;
+    column.appendChild(color);
+    column.appendChild(monthName);
+    graphic.appendChild(column);
+  }
+  painel.appendChild(graphic);
+
+  for (const month of year.months) {
+    addElement(painel, "h4", month.name);
+    const releaseTable = document.createElement("table");
+    releaseTable.className = "release-table";
+    const titleLine = document.createElement("tr");
+    addElement(titleLine, "th", "Categoria");
+    addElement(titleLine, "th", "Valor");
+    releaseTable.appendChild(titleLine);
     for (const release of month.releases) {
-      const releaseDetails =
-        release.category + " " + release.type + " " + release.value;
-      addElement(painel, "p", releaseDetails);
+      const releaseLine = document.createElement("tr");
+      addElement(releaseLine, "td", release.category);
+      addElement(releaseLine, "td", moneyFormat(release.value));
+      releaseTable.appendChild(releaseLine);
     }
-    addElement(painel, "h4", month.totalizer.balance);
-    addElement(painel, "hr");
+    const interestLine = document.createElement("tr");
+    addElement(interestLine, "th", "Juros");
+    addElement(interestLine, "th", moneyFormat(month.totalizer.interest));
+    releaseTable.appendChild(interestLine);
+
+    const incomeLine = document.createElement("tr");
+    addElement(incomeLine, "th", "Rendimentos");
+    addElement(incomeLine, "th", moneyFormat(month.totalizer.income));
+    releaseTable.appendChild(incomeLine);
+
+    const balanceLine = document.createElement("tr");
+    addElement(balanceLine, "th", "Total");
+    addElement(balanceLine, "th", moneyFormat(month.totalizer.balance));
+    releaseTable.appendChild(balanceLine);
+
+    painel.appendChild(releaseTable);
   }
   app.appendChild(painel);
 }
@@ -82,8 +121,8 @@ function addRelease() {
   const value = document.getElementById("value").value;
   year.addRelease(month, new Release(category, type, parseFloat(value)));
   year.calculateBalance();
-  document.getElementById("month").value = "";
-  document.getElementById("type").value = "";
+  document.getElementById("month").value = year.months[0].name;
+  document.getElementById("type").value = "income";
   document.getElementById("category").value = "";
   document.getElementById("value").value = "";
   render();
@@ -92,3 +131,12 @@ function addRelease() {
 const button = document.getElementById("button");
 console.log(button);
 button.addEventListener("click", addRelease);
+
+const SelectedMonth = document.getElementById("month");
+for (const month of year.months) {
+  const option = document.createElement("option");
+  option.text = month.name;
+  SelectedMonth.add(option);
+
+  console.log(month.name);
+}
