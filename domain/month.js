@@ -15,15 +15,20 @@ class Month {
     }),
       (this.releases = []);
   }
+
+  rounded(value) {
+  return Math.round(value * 100) / 100;
+}
+
   addRelease(release) {
     this.releases.push(release);
   }
   calculateInterest(value) {
-    const interest = rounded(value * 0.1);
+    const interest = this.rounded(value * 0.1);
     return interest;
   }
   calculateIncome(value) {
-    const income = rounded(value * 0.005);
+    const income = this.rounded(value * 0.005);
     return income;
   }
   calculateBalance() {
@@ -41,7 +46,7 @@ class Month {
     this.distributeExpensive();
     this.applyInterest();
     this.applyIncome();
-    this.totalizer.balance = rounded(this.totalizer.balance);
+    this.totalizer.balance = this.rounded(this.totalizer.balance);
   }
   computeIncome() {
     for (const release of this.releases) {
@@ -56,7 +61,7 @@ class Month {
   computeExpensive() {
     for (const release of this.releases) {
       if (release.type === "expensive") {
-        this.totalizer.balance -= rounded(release.value);
+        this.totalizer.balance -= this.rounded(release.value);
         this.totalizer.expensive += release.value;
       }
     }
@@ -65,7 +70,7 @@ class Month {
     const distributionOfExpensive = [];
     for (const release of this.releases) {
       if (release.type === "expensive") {
-        const percentage = rounded(
+        const percentage = this.rounded(
           (release.value / this.totalizer.expensive) * 100
         );
         distributionOfExpensive.push({

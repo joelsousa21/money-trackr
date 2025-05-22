@@ -6,25 +6,19 @@
     <title>MoneyTrackr</title>
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body>
-    <h1>MoneyTrackr</h1>
-    <div id="form-release">
-      <select id="month"></select>
-      <select id="type">
-        <option value="income">Receita</option>
-        <option value="expensive">Despesa</option>
-      </select>
-      <input id="category" type="text" placeholder="Categoria" />
-      <input id="value" type="number" placeholder="Valor" />
-      <button id="button">Adicionar Lançamento</button>
-    </div>
-
+  <body>  
     <div id="app"></div>
-    <script src="utils.js"></script>
-    <script src="release.js"></script>
-    <script src="month.js"></script>
-    <script src="year.js"></script>
+    <script src="domain/release.js"></script>
+    <script src="domain/month.js"></script>
+    <script src="domain/year.js"></script>
+    <script src="app_components/graphic.js"></script>
+    <script src="base_components/table.js"></script>
+    <script src="base_components/h4.js"></script>
+    <script src="base_components/div.js"></script>
+    <script src="base_components/select.js"></script>
+    <script src="base_components/button.js"></script>
+    <script src="base_components/input.js"></script>
+    <script src="views/screen.js"></script>
     <script src="main.js"></script>
-    <!-- <script src="test.js"></script> -->
   </body>
 </html>

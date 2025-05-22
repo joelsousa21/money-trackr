@@ -1,4 +1,4 @@
-## Money Tracker
+## Money Trackr
 
 Sistema de controle financeiro mensal e anual para simulação de entradas e saídas de recursos, com análise de saldo, juros, rendimentos e distribuição de gastos por categoria.
 

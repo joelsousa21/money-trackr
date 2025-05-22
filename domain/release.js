@@ -15,4 +15,8 @@ class Release {
     this.type = type;
     this.value = value;
   }
+
+  getValueString(){
+        return (this.type === "expensive") ?  this.value * -1: this.value;
+  }
 }
